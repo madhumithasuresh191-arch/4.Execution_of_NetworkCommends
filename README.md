@@ -1,4 +1,6 @@
 # 4.Execution_of_NetworkCommands
+## Name:S Madhumitha
+## Reg no: 212224050217
 ## AIM :Use of Network commands in Real Time environment
 ## Software : Command Prompt And Network Protocol Analyzer
 ## Procedure: To do this EXPERIMENT- follows these steps:
@@ -26,7 +28,63 @@ This commands includes
 • Other IP Commands e.g. show ip route etc.
 <BR>
 
+## Program
+server
+~~~
+import socket
+
+# DNS records (simulated database)
+dns_table = {
+    "google.com": "142.250.190.78",
+    "yahoo.com": "98.137.11.163",
+    "openai.com": "104.18.12.123",
+    "example.com": "93.184.216.34"
+}
+# Create UDP socket
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+# Bind server to localhost and port
+server_socket.bind(("127.0.0.1", 15353))
+
+print("DNS Server running on port 5353...\n")
+
+while True:
+    # Receive domain request from client
+    message, client_address = server_socket.recvfrom(1024)
+    domain = message.decode()
+    print("Request received for:", domain)
+    # Check DNS table
+    ip = dns_table.get(domain, "Domain not found")
+    # Send response back to client
+    server_socket.sendto(ip.encode(), client_address)
+~~~
+client
+~~~
+import socket
+# Create UDP socket
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+server_address = ("127.0.0.1", 15353)
+
+# Get domain name from user
+domain = input("Enter domain name: ")
+
+# Send request to server
+client_socket.sendto(domain.encode(), server_address)
+
+# Receive response
+ip_address, server = client_socket.recvfrom(1024)
+
+print("IP Address:", ip_address.decode())
+
+client_socket.close()
+~~~
+
 ## Output
+server
+![cn ex4 server](https://github.com/user-attachments/assets/5be30851-18dc-4ff5-b22d-8b180fd81bc1)
+
+client
+![cn ex 4 client](https://github.com/user-attachments/assets/979362df-12ed-452c-9840-e26932553b90)
 
 ## Result
 Thus Execution of Network commands Performed 
