@@ -1,6 +1,6 @@
 # 4.Execution_of_NetworkCommands
 ## Name:S Madhumitha
-## Reg no: 212224050217
+## Reg no: 212225040217
 ## AIM :Use of Network commands in Real Time environment
 ## Software : Command Prompt And Network Protocol Analyzer
 ## Procedure: To do this EXPERIMENT- follows these steps:
